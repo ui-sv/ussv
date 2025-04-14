@@ -1,9 +1,22 @@
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import unocss from 'unocss/vite';
+import {
+	presetWind4,
+	transformerDirectives,
+	transformerCompileClass,
+	transformerVariantGroup
+} from 'unocss';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [
+		sveltekit(),
+		unocss({
+			presets: [presetWind4({ dark: 'media' })],
+			transformers: [transformerDirectives(), transformerCompileClass(), transformerVariantGroup()]
+		})
+	],
 	test: {
 		workspace: [
 			{
